@@ -34,7 +34,7 @@ app.post("/data/email/add", (req, res) => {
   const sqlInsert = `INSERT INTO emails_list (email) VALUES(?)`;
   db.query(sqlInsert, [email], (err, result) => {
     if (err) {
-      console.log(error);
+      console.log(err);
     }
   });
 });
