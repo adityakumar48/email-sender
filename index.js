@@ -36,7 +36,11 @@ app.post("/data/email/add", (req, res) => {
     if (err) {
       console.log(err);
     }
+    if (result) {
+      console.log(result);
+    }
   });
+
   res.end();
 });
 
