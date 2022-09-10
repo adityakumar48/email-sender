@@ -79,7 +79,7 @@ app.get("/", function (req, res) {
       console.log(error, "email not sent");
     }
   };
-  setInterval(() => sendEmail(), 21600000); // 2min -> 10min -> 6 hours
+  setInterval(() => sendEmail(), 120000); // every 1 min send email
 });
 
 app.listen(port, () =>
