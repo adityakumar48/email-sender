@@ -20,6 +20,13 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+db.connect((error) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Database Successfully Connnected...");
+  }
+});
 app.get("/data/email/list", (req, res) => {
   const sqlGet = `SELECT * FROM emails_list`;
   db.query(sqlGet, (err, result) => {
@@ -37,6 +44,7 @@ app.post("/data/email/add", (req, res) => {
       console.log(err);
     }
   });
+  res.end();
 });
 
 app.get("/", function (req, res) {
