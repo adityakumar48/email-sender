@@ -7,18 +7,26 @@ const port = process.env.PORT || 8000;
 require("dotenv").config();
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const mysql = require("mysql2");
+const mysql = require("mysql");
 
-const db = mysql.createPool({
-  host: process.env.HOST,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
+const db = mysql.createConnection({
+  host: process.env.DATABASE_HOST,
+  user: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE,
 });
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+db.connect((error) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Database Successfully Connnected...");
+  }
+});
 
 app.get("/data/email/list", (req, res) => {
   const sqlGet = `SELECT * FROM emails_list`;
